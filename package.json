@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/YiruDing/Acme-people-places-things-#readme",
   "dependencies": {
+    "const": "^1.0.0",
     "express": "^4.17.1",
+    "html-template-tag": "^3.2.0",
     "method-override": "^3.0.0",
     "nodemon": "^2.0.7",
     "pg": "^8.5.1",
