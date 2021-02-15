@@ -62,7 +62,7 @@ app.get('/',async(req,res,next)=>{
             </div>
             <div id='activity-stream'>
                 ${purchaseRecord.map((eachRecord) => {
-                  return `<p>${eachRecord.purchase}</p><button type='submit'>X</button>`
+                  return `<p>${eachRecord.purchase}</p><button type='submit'><a href='/delete'/>X</a></button>`
                 })}
             </div>
             </body>
@@ -120,7 +120,7 @@ app.post('/', async(req,res,next) => {
       </div>
       <div id='activity-stream'>
             ${purchaseRecord.map((eachRecord) => {
-              return `<p>${eachRecord.purchase}</p><button type='submit'>X</button>`
+              return `<p>${eachRecord.purchase}</p><button type='submit'><a href='/delete/${eachRecord.id}'/>X</a></button>`
             })}
       </div>
       </body>
@@ -128,5 +128,15 @@ app.post('/', async(req,res,next) => {
 `)
   } catch(err) {
     next(err);
+  }
+})
+
+app.get('/delete/:id', async(req,res,next) => {
+  try {
+    const toDelete = await PurchaseRecord.findByPk(req.params.id);
+    await toDelete.destroy();
+    res.redirect('/');
+  } catch(err) {
+    next(err)
   }
 })
